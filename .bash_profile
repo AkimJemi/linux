@@ -21,23 +21,32 @@ autogit(){
   fi
   for path in "${!git_paths[@]}"; do
     branch=main
-    if [ "$path" == "$1" ];then
-      path_url=${git_paths[${path}]}
-      echo "[${path}${space:0:`expr ${#space}-${#path}`}]: ${path_url}"
-      if [ "$1" == "git_practice" ]; then
-        cp $bashrc $path_url/`basename $bashrc`
-        cp $bash_profile $path_url/`basename $bash_profile`
+    if [ $1 != "all" ];then
+      if [ "$path" == "$1" ];then
+        git_commit $path
+        break
       fi
-      if [ "$1" == "algorithm_Java" ]; then
-        branch=master
-      fi
-      cd ${git_paths[${path}]}
-      git add .
-      git commit -m "auto commit $(date +'%Y/%m/%d %H:%M:%S')"
-      git push origin $branch
+    else
+      git_commit $path
     fi
   done
 }
+git_commit(){
+  path_url=${git_paths[${path}]}
+  echo "[${path}${space:0:`expr ${#space}-${#path}`}]: ${path_url}"
+  if [ "$1" == "git_practice" ]; then
+    cp $bashrc $path_url/`basename $bashrc`
+    cp $bash_profile $path_url/`basename $bash_profile`
+  fi
+  if [ "$1" == "algorithm_Java" ]; then
+    branch=master
+  fi
+  cd ${git_paths[${path}]}
+  git add .
+  git commit -m "auto commit $(date +'%Y/%m/%d %H:%M:%S')"
+  git push origin $branch
+}
+
 showgitrepository(){
   for path in "${!git_paths[@]}"; do
     path_url=${git_paths[${path}]}
