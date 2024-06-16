@@ -1,36 +1,46 @@
 echo hi bash_profile
+#test -f ~/.profile && . ~/.profile
 bashrc=~/.bashrc
 bash_profile=~/.bash_profile
+space="               "
 
-#test -f ~/.profile && . ~/.profile
 prl(){
-test -f $bashrc && . $bashrc
-test -f $bash_profile && . $bash_profile
+  test -f $bashrc && . $bashrc
+  test -f $bash_profile && . $bash_profile
 }
 catbashrc(){
-cat $bashrc
+  cat $bashrc
 }
 catprofile(){
-cat $bash_profile
+  cat $bash_profile
 }
 autogit(){
-if [ "$1" == "" ];then
-  echo "please type git repository"
-  return
-fi
-for path in "${!git_paths[@]}"; do
-  if [ "$path" == "$1" ];then
-    path_url=${git_paths[${path}]}
-    echo "${path}:${path_url}"
-    echo $path_url\`basename $bashrc`
-    if [ "$1" == "git_practice" ]; then
-      cp $bashrc $path_url\`basename $bashrc`
-      cp $bash_profile $path_url\`basename $bash_profile`
-    fi
-    cd ${git_paths[${path}]}
-    #git add .
-    #git commit -m "auto commit $(date +'%Y/%m/%d %H:%M:%S')"
-    #git push origin main
+  if [ -z $1 ];then
+    echo "please type git repository"
+    return
   fi
-done
+  for path in "${!git_paths[@]}"; do
+    branch=main
+    if [ "$path" == "$1" ];then
+      path_url=${git_paths[${path}]}
+      echo "[${path}${space:0:`expr ${#space}-${#path}`}]: ${path_url}"
+      if [ "$1" == "git_practice" ]; then
+        cp $bashrc $path_url/`basename $bashrc`
+        cp $bash_profile $path_url/`basename $bash_profile`
+      fi
+      if [ "$1" == "algorithm_Java" ]; then
+        branch=master
+      fi
+      cd ${git_paths[${path}]}
+      git add .
+      git commit -m "auto commit $(date +'%Y/%m/%d %H:%M:%S')"
+      git push origin $branch
+    fi
+  done
+}
+showgitrepository(){
+  for path in "${!git_paths[@]}"; do
+    path_url=${git_paths[${path}]}
+    echo "[${path}${space:0:`expr ${#space}-${#path}`}]: ${path_url}"
+  done
 }
