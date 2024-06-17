@@ -3,9 +3,9 @@ echo hi bash_profile
 bashrc=~/.bashrc
 bash_profile=~/.bash_profile
 space="               "
-
+test -f $bashrc && . $bashrc
 prl(){
-  test -f $bashrc && . $bashrc
+  # test -f $bashrc && . $bashrc
   test -f $bash_profile && . $bash_profile
 }
 catbashrc(){
@@ -35,7 +35,7 @@ autogit(){
 git_commit(){
   path_url=${git_paths[${path}]}
   echo "[${path}${space:0:`expr ${#space}-${#path}`}]: ${path_url}"
-  if [ "$1" == "git_practice" ]; then
+  if [ "$1" == "linux" ]; then
     cp $bashrc $path_url/`basename $bashrc`
     cp $bash_profile $path_url/`basename $bash_profile`
   fi
