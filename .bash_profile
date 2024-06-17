@@ -17,6 +17,7 @@ catprofile(){
 autogit(){
   if [ -z $1 ];then
     echo "please type git repository"
+    showgitrepository
     return
   fi
   for path in "${!git_paths[@]}"; do

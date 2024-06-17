@@ -1,4 +1,4 @@
-echo hi
+echo hi bashrc
 export declare -A git_paths=(
     ["utf"]="C:\Users\wowp1\Desktop\laptop_github\ufc"
     ["laptop_github"]="C:\Users\wowp1\Desktop\laptop_github"
