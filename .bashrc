@@ -1,16 +1,20 @@
 echo hi bashrc
 
-export declare -xA git_modes=(
-    ["commit"]="git add .; git commit -m 'auto commit $(date +'%Y/%m/%d %H:%M:%S')'; git push origin $_branch;"
-    ["status"]="git status;"
-    ["log"]="git log;"
-)
+
 
 #declare -A ufc=(
 #    ["_branch"]="main"
 #    ["_repository_path"]="C:\Users\wowp1\Desktop\git\ufc"
 #)
 
+commit_command=('git add .' 'git commit -m 'auto commit $(date +'%Y/%m/%d %H:%M:%S')'' 'git push origin $_branch')
+echo 11
+echo ${commit_command[@]}
+export declare -xA git_modes=(
+    ["commit"]="${commit_command[@]}"
+    ["status"]="git status"
+    ["log"]="git log"
+)
 export declare -xA git_repositorys=(
     ["ufc"]='main C:\Users\wowp1\Desktop\git\ufc'
     ["linux"]='main C:\Users\wowp1\Desktop\git\linux'

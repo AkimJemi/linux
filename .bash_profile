@@ -31,7 +31,7 @@ AUTOGIT(){
   _repository_info=${git_repositorys[$_repository]}
   if [ "$_repository_info" == "" ];then CHECK_REPOSITORY; return; fi
 
-  _EXECUTE_COMMAND=${git_modes[$_mode]}
+
   _repository_info=(${_repository_info})
   _branch=${_repository_info[0]}
   _repository_path=${_repository_info[1]}
@@ -43,14 +43,16 @@ AUTOGIT(){
     return
   fi
 
-  [ "$_mode" == "status" ] && GIT_STATUS
+  [ "$_mode" == "status" ] || [ "$_mode" == "log" ] && GIT_VOID
   [ "$_mode" == "commit" ] && GIT_COMMIT
   [ "$ret" != "OK" ] && echo 'not defined repository'
 }
 
 
-GIT_STATUS(){
-  CHECK_REPOSITORY $_repository
+GIT_VOID(){
+  _EXECUTE_COMMAND=${git_modes[$_mode]}
+  cd "${_repository_path}"
+  $_EXECUTE_COMMAND
 }
 
 
@@ -61,8 +63,13 @@ GIT_COMMIT(){
     cp $bash_profile $_repository_path/`basename $bash_profile`
   fi
   cd "${_repository_path}"
-  echo $_EXECUTE_COMMAND
-  #$_EXECUTE_COMMAND
+  test1=(${git_modes["$_mode"]})
+  echo "${test1[0]}" 22
+  #_EXECUTE_COMMAND=${git_modes[$_mode]}
+  #_EXECUTE_COMMAND=(${_EXECUTE_COMMAND})
+  #echo ${_EXECUTE_COMMAND[2]} 22
+  ##$_EXECUTE_COMMAND
+ #for _repository_ in "${!git_repositorys[@]}"; do echo "[${_repository_}${space:0:`expr ${#space}-${#_repository_}`}]: ${git_repositorys[${_repository_}]}"; done;
   git add .
   git commit -m "auto commit $(date +'%Y/%m/%d %H:%M:%S')"
   git push origin $_branch
