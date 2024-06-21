@@ -4,10 +4,12 @@ bashrc=~/.bashrc
 bash_profile=~/.bash_profile
 space="               "
 test -f $bashrc && . $bashrc
+#. $bashrc
 
 PRL(){
-  # test -f $bashrc && . $bashrc
+  #test -f $bashrc && . $bashrc
   test -f $bash_profile && . $bash_profile
+  #. $bashrc
 }
 
 

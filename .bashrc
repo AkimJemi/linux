@@ -1,12 +1,17 @@
 echo hi bashrc
 
-export declare -A git_modes=(
+export declare -xA git_modes=(
     ["commit"]="git add .; git commit -m 'auto commit $(date +'%Y/%m/%d %H:%M:%S')'; git push origin $_branch;"
     ["status"]="git status;"
     ["log"]="git log;"
 )
 
-export declare -A git_repositorys=(
+#declare -A ufc=(
+#    ["_branch"]="main"
+#    ["_repository_path"]="C:\Users\wowp1\Desktop\git\ufc"
+#)
+
+export declare -xA git_repositorys=(
     ["ufc"]='main C:\Users\wowp1\Desktop\git\ufc'
     ["linux"]='main C:\Users\wowp1\Desktop\git\linux'
     ["SUUMO"]='main C:\work\sts-4.15.3.RELEASE-workspace\Suumo'
@@ -16,5 +21,5 @@ export declare -A git_repositorys=(
     ["all"]='#commit_all'
 )
 
-
 # echo $$ $0 $1 $* $#
+# env | grep ^PATH | sed 's/:/\n/g'
