@@ -1,5 +1,5 @@
 echo hi bashrc
-
+alias tree='cmd //c tree //A //F | iconv -f CP932 -t UTF-8'
 
 
 #declare -A ufc=(
