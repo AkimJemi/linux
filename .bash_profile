@@ -63,8 +63,6 @@ GIT_COMMIT(){
     cp $bash_profile $_repository_path/`basename $bash_profile`
   fi
   cd "${_repository_path}"
-  test1=(${git_modes["$_mode"]})
-  echo "${test1[0]}" 22
   #_EXECUTE_COMMAND=${git_modes[$_mode]}
   #_EXECUTE_COMMAND=(${_EXECUTE_COMMAND})
   #echo ${_EXECUTE_COMMAND[2]} 22
@@ -97,4 +95,9 @@ CHECK_MODE(){
     echo "please type git mode"
     SHOW_GIT_MODE_LIST
   fi
+}
+
+codets(){
+  target_path='C:\Users\wowp1\Desktop\git\laptop_repository\React\Hakim\TypescriptSTUDY'
+  code $target_path
 }
