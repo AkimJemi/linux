@@ -1,0 +1,6 @@
+
+netstat -ano | findstr :8080
+
+  TCP    0.0.0.0:8080           0.0.0.0:0              LISTENING       21884
+
+taskkill /PID 21884 /F
